@@ -1,0 +1,17 @@
+# dependencies
+/node_modules
+
+# local env files
+.env
+# /src/env/.env
+
+# ouput files
+/dist/
+
+# log files
+/log/
+
+# lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
