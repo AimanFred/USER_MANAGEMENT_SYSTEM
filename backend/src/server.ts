@@ -6,23 +6,27 @@
    Framework: Node.js
    1. Setup apollo server
 
-   Last Edited: 12/12/2022
+   Last Edited: 03/01/2023
    Edited By: Farid faridaiman@schinkelgroups.com.my
    Reason Edited: 
-   1- 
+   1- add types to typeDefs and resolvers
 */
 
 import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import express from "express";
 import http from "http";
-import bodyParser from 'body-parser';
-import typeDefs from "./typeDefs";
-import resolvers from "./resolvers";
+import bodyParser from "body-parser";
+import typeDefs from "./graphql/typeDefs";
+import resolvers from "./graphql/resolvers";
+import { IResolvers } from "@graphql-tools/utils";
+import { DocumentNode } from "graphql";
 
-async function startApolloServer(typeDefs, resolvers) {
+async function startApolloServer(
+  typeDefs: DocumentNode,
+  resolvers: IResolvers<unknown, unknown, Record<string, any>, any>
+) {
   // The ApolloServer constructor requires two parameters: your schema
   // definition and your set of resolvers.
   const app = express();
