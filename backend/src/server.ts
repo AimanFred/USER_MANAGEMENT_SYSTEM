@@ -6,6 +6,11 @@
    Framework: Node.js
    1. Setup apollo server
 
+   Last Edited: 31/01/2023
+   Edited By: Farid faridaiman@schinkelgroups.com.my
+   Reason Edited: 
+   1- set graphql path into variable
+
    Last Edited: 03/01/2023
    Edited By: Farid faridaiman@schinkelgroups.com.my
    Reason Edited: 
@@ -31,6 +36,7 @@ async function startApolloServer(
   // definition and your set of resolvers.
   const app = express();
   const httpServer = http.createServer(app);
+  const graphqlPath = "/graphql"
   const server = new ApolloServer({
     typeDefs,
     resolvers,
@@ -39,7 +45,7 @@ async function startApolloServer(
 
   await server.start();
 
-  app.use("/graphql", bodyParser.json(), expressMiddleware(server));
+  app.use(graphqlPath, bodyParser.json(), expressMiddleware(server));
 
   await new Promise<void>((resolve) =>
     httpServer.listen({ port: 4000 }, resolve)
@@ -51,6 +57,6 @@ async function startApolloServer(
   // const { url } = await startStandaloneServer(server, {
   //   listen: { port: 4000, path: "/adham" },
   // });
-  console.log(`🚀  Server ready at http://localhost:4000/graphql `);
+  console.log(`🚀  Server ready at http://localhost:4000${graphqlPath}`);
 }
 startApolloServer(typeDefs, resolvers);
